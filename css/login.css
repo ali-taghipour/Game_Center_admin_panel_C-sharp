@@ -1,0 +1,187 @@
+﻿
+@font-face {
+    font-family: 'Tanha';
+    src: url('../font/tanha-font-v0.9/Tanha.eot') format('embedded-opentype'), url('../font/tanha-font-v0.9/Tanha.ttf') format('truetype'), url('../font/tanha-font-v0.9/Tanha.woff') format('woff');
+    src: url('../font/tanha-font-v0.9/Farsi-Digits/Tanha-FD.eot') format('embedded-opentype'), url('../font/tanha-font-v0.9/Farsi-Digits/Tanha-FD.ttf') format('truetype'), url('../font/tanha-font-v0.9/Farsi-Digits/Tanha-FD.woff') format('woff');
+}
+
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tanha';
+    font-size: 35px;
+    line-height: 0;
+    font-weight: 900;
+}
+
+#slider{
+    position: relative;
+    // overflow:hidden;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 100%;
+    // opacity:0.95;
+    filter: brightness(30%);
+}
+
+.back {
+    border: 1px solid #ccc;
+    width: 500%;
+    height: 100%;
+}
+
+    .back > .items {
+        float: left;
+        width: 20%;
+    }
+
+
+        .back > .items > img {
+            width: 100%;
+            opacity: 0.95;
+        }
+
+.margin {
+    // border:1px solid #ccc;
+    margin: 0px auto;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+    .margin > #all_front {
+        position: relative;
+        color: white;
+        height: 430px;
+        width: 870px;
+        // border: 1px solid #ccc;
+        margin: 150px auto;
+        direction: rtl;
+        background-size: 100%;
+        background-image: url("../images/login/tom-clancy's-rainbow-six -siege-hd-wallpapers-33829-9482458.jpg");
+        z-index: 100000;
+        box-shadow: 0px 0px 7px 7px grey;
+        overflow: hidden;
+        font-family: 'Tanha';
+        font-size: 19px;
+        line-height: 0;
+    }
+
+#all_front > img {
+    width: 100%;
+    height: 100%;
+}
+
+
+#all_front > .f {
+    height: 100%;
+    width: 50%;
+    // border: 1px solid #ccc;
+    direction: rtl;
+    background: #ffffff 10% 0%;
+    opacity: 0.8;
+    position: absolute;
+    right: 0px;
+    color: red;
+    padding-top: 20px;
+    padding-right: 35px;
+}
+
+    #all_front > .f > .items {
+        margin: 15px 8px;
+    }
+
+        #all_front > .f > .items > input {
+            color: #650303;
+            border: 0 none;
+            border-bottom: 1px solid #ccc;
+            width: 80%;
+            margin-top: 20px;
+            background: none;
+            font-size: 15px;
+            font-family: Tanha;
+            line-height: 2.3;
+        }
+
+    #all_front > .f > .sa0 {
+        margin: 10px auto;
+        text-align: center;
+        color: #971919;
+    }
+
+
+
+    #all_front > .f > .bottom {
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 10em;
+        margin-right: 80px;
+        position: relative;
+        top: 5px;
+        transition: 0.5s;
+        text-decoration: none;
+        font-family: tanha;
+        line-height: 0;
+        background: #17b49b;
+        margin-top: 20px;
+    }
+
+    #all_front > .f > .s1 > input[type=submit] {
+        border: 0 none;
+        text-decoration: none;
+        background: transparent;
+        color: #ffffff;
+        font-family: 'tanha';
+        font-size: 12px;
+        padding: 7px 25px;
+        font-weight: 900;
+        transition: 0.5s;
+    }
+
+        #all_front > .f > .s1 > input[type=submit]:hover {
+            cursor: pointer;
+            background: #08207c;
+            transition: 0.5s;
+            border-radius: 10em;
+        }
+
+    #all_front > .f > .s2 {
+        font-family: 'tanha';
+        font-size: 15px;
+        padding: 17px 16px;
+        margin-top: 15px;
+        background: #3bb815;
+        transition: 0.5s;
+        margin-right: 30px;
+    }
+
+        #all_front > .f > .s2:hover {
+            padding-left: 125px;
+            transition: 0.5s;
+            border-radius: 0em 10em 10em 0em;
+            background: #0e500b;
+        }
+
+        #all_front > .f > .s2 > .key {
+            text-decoration: none;
+            padding: 16px 16px;
+            font-weight: 900;
+            color: #ccc;
+        }
+
+
+
+
+    #all_front > .f > .bottom:hover {
+        cursor: pointer;
+        transition: 0.5s;
+        color: white;
+    }
+
+
+    #all_front > .f > .error {
+
+        font-size: 15px;
+        margin-top: 15px;
+    }

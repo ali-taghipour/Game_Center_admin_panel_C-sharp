@@ -1,0 +1,294 @@
+CREATE TABLE [dbo].[account] (
+    [id]            INT            IDENTITY (1, 1) NOT NULL,
+    [userName]      NVARCHAR (50)  NOT NULL,
+    [userPassword]  NVARCHAR (50)  NOT NULL,
+    [userType]      NVARCHAR (20)  NULL,
+    [firstName]     NVARCHAR (20)  NULL,
+    [lastName]      NVARCHAR (20)  NULL,
+    [sex]           BIT            NULL,
+    [age]           INT            NULL,
+    [pic]           NVARCHAR (50)  NULL,
+    [emailAddress]  NVARCHAR (50)  NOT NULL,
+    [province]      NVARCHAR (20)  NULL,
+    [city]          NVARCHAR (20)  NULL,
+    [homeAddress]   NVARCHAR (MAX) NULL,
+    [gamerPlatform] VARCHAR (20)   NULL,
+    [favoriteGenre] NVARCHAR (50)  NULL,
+    [registerDate]  INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    UNIQUE NONCLUSTERED ([userName] ASC)
+);
+
+go
+
+CREATE TABLE [dbo].[advertisement] (
+    [id]             INT            IDENTITY (1, 1) NOT NULL,
+    [title]          NVARCHAR (50)  NULL,
+    [fullName]       NVARCHAR (50)  NOT NULL,
+    [companyName]    NVARCHAR (50)  NULL,
+    [address]        NVARCHAR (75)  NULL,
+    [email]          NVARCHAR (70)  NULL,
+    [phone]          INT            NOT NULL,
+    [advText]        NVARCHAR (MAX) NULL,
+    [pic]            NVARCHAR (50)  NULL,
+    [addDate]        INT            NULL,
+    [lastUpdateDate] INT            NULL,
+    [startDate]      INT            NULL,
+    [endDate]        INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+go
+
+CREATE TABLE [dbo].[basket] (
+    [id]         INT IDENTITY (1, 1) NOT NULL,
+    [status]     INT NULL,
+    [totalPrice] INT NULL,
+    [addDate]    INT NULL,
+    [updateDate] INT NULL,
+    [personId]   INT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([personId]) REFERENCES [dbo].[account] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[basketProduct] (
+    [id]        INT IDENTITY (1, 1) NOT NULL,
+    [price]     INT NULL,
+    [count]     INT NULL,
+    [addDate]   INT NULL,
+    [proudutId] INT NULL,
+    [basketId]  INT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([proudutId]) REFERENCES [dbo].[product] ([id]),
+    FOREIGN KEY ([basketId]) REFERENCES [dbo].[basket] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[categories] (
+    [id]     INT           IDENTITY (1, 1) NOT NULL,
+    [title]  NVARCHAR (50) NULL,
+    [status] BIT           NULL,
+    [catId]  INT           NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([catId]) REFERENCES [dbo].[categories] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[commentsManage] (
+    [id]        INT            IDENTITY (1, 1) NOT NULL,
+    [text]      NVARCHAR (MAX) NULL,
+    [fullName]  NVARCHAR (50)  NOT NULL,
+    [email]     NVARCHAR (70)  NOT NULL,
+    [seen]      BIT            NULL,
+    [isAccept]  BIT            NULL,
+    [isSpecial] BIT            NULL,
+    [userRank]  INT            NULL,
+    [addDate]   INT            NULL,
+    [personId]  INT            NULL,
+    [productId] INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([personId]) REFERENCES [dbo].[account] ([id]),
+    FOREIGN KEY ([productId]) REFERENCES [dbo].[product] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[contactUs] (
+    [id]       INT            IDENTITY (1, 1) NOT NULL,
+    [subject]  NVARCHAR (70)  DEFAULT ('null') NOT NULL,
+    [text]     NVARCHAR (MAX) DEFAULT ('null') NOT NULL,
+    [fullName] NVARCHAR (50)  DEFAULT ('null') NOT NULL,
+    [email]    NVARCHAR (70)  DEFAULT ('null') NOT NULL,
+    [addDate]  INT            NULL,
+    [status]   INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+go
+
+CREATE TABLE [dbo].[gameChange] (
+    [id]           INT            IDENTITY (1, 1) NOT NULL,
+    [gameName]     NVARCHAR (50)  NOT NULL,
+    [genre]        NVARCHAR (20)  NULL,
+    [gameOrder]    INT            NULL,
+    [pic]          NVARCHAR (50)  NULL,
+    [describe]     NVARCHAR (MAX) NULL,
+    [gamePlatform] NVARCHAR (15)  NULL,
+    [addDate]      INT            NULL,
+    [offerPrice]   INT            NULL,
+    [personName]   INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([personName]) REFERENCES [dbo].[account] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[gameplay] (
+    [id]       INT            IDENTITY (1, 1) NOT NULL,
+    [gpDate]   INT            NULL,
+    [pic]      NVARCHAR (50)  NULL,
+    [video]    NVARCHAR (50)  NULL,
+    [describe] NVARCHAR (MAX) NULL,
+    [personId] INT            NULL,
+    [proId]    INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([proId]) REFERENCES [dbo].[product] ([id]),
+    FOREIGN KEY ([personId]) REFERENCES [dbo].[account] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[news] (
+    [id]        INT            IDENTITY (1, 1) NOT NULL,
+    [title]     NVARCHAR (50)  NOT NULL,
+    [addDate]   INT            NULL,
+    [brand]     NVARCHAR (20)  NULL,
+    [orderNews] INT            NULL,
+    [genre]     NVARCHAR (20)  NULL,
+    [describe]  NVARCHAR (MAX) NULL,
+    [pic]       NVARCHAR (50)  NULL,
+    [gameplay]  NVARCHAR (50)  NULL,
+    [deadLine]  INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+go
+
+CREATE TABLE [dbo].[payment] (
+    [id]         INT            IDENTITY (1, 1) NOT NULL,
+    [isSuccess]  BIT            NULL,
+    [amount]     INT            NULL,
+    [describe]   NVARCHAR (MAX) NULL,
+    [addDate]    INT            NULL,
+    [paymentKey] BIGINT         NULL,
+    [statusCode] INT            NULL,
+    [personId]   INT            NULL,
+    [basketId]   INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([personId]) REFERENCES [dbo].[account] ([id]),
+    FOREIGN KEY ([basketId]) REFERENCES [dbo].[basket] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[price] (
+    [id]           INT IDENTITY (1, 1) NOT NULL,
+    [productPrice] INT NOT NULL,
+    [pDateIn]      INT NULL,
+    [pTimeIn]      INT NULL,
+    [proId]        INT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([proId]) REFERENCES [dbo].[product] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[product] (
+    [id]              INT            IDENTITY (1, 1) NOT NULL,
+    [pName]           NVARCHAR (30)  NOT NULL,
+    [genre]           NVARCHAR (20)  NULL,
+    [coverPic]        NVARCHAR (50)  NULL,
+    [brand]           NVARCHAR (20)  NULL,
+    [productPlatform] NVARCHAR (20)  NULL,
+    [trailer]         NVARCHAR (50)  NULL,
+    [describe]        NVARCHAR (MAX) NULL,
+    [existance]       BIT            NULL,
+    [pNumber]         INT            NULL,
+    [pLink]           NVARCHAR (100) NULL,
+    [addDate]         INT            NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+go
+
+CREATE TABLE [dbo].[sendNews] (
+    [id]       INT IDENTITY (1, 1) NOT NULL,
+    [sendDate] INT NULL,
+    [newsId]   INT NULL,
+    [goalID]   INT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([newsId]) REFERENCES [dbo].[news] ([id]),
+    FOREIGN KEY ([goalID]) REFERENCES [dbo].[account] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[slide] (
+    [id]         INT           IDENTITY (1, 1) NOT NULL,
+    [title]      NVARCHAR (50) NOT NULL,
+    [pic]        NVARCHAR (50) NULL,
+    [slideOrder] INT           NULL,
+    [show]       BIT           NULL,
+    [startDate]  INT           NULL,
+    [endDate]    INT           NULL,
+    [addDate]    INT           NULL,
+    [lastUpdate] INT           NULL,
+    [proLink]    INT           NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([proLink]) REFERENCES [dbo].[product] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[store] (
+    [id]        INT           IDENTITY (1, 1) NOT NULL,
+    [storeName] NVARCHAR (50) NULL,
+    [staffName] NVARCHAR (30) NULL,
+    [email]     NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+go
+
+CREATE TABLE [dbo].[storeAddress] (
+    [id]         INT           IDENTITY (1, 1) NOT NULL,
+    [storeState] NVARCHAR (25) NULL,
+    [city]       NVARCHAR (30) NULL,
+    [street]     NVARCHAR (50) NULL,
+    [alley]      NVARCHAR (50) NULL,
+    [zip_code]   INT           NULL,
+    [storeId]    INT           NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([storeId]) REFERENCES [dbo].[store] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[storePhone] (
+    [id]          INT           IDENTITY (1, 1) NOT NULL,
+    [phoneType]   NVARCHAR (10) NULL,
+    [phoneNumber] INT           NULL,
+    [storeId]     INT           NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([storeId]) REFERENCES [dbo].[store] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[userAddress] (
+    [id]        INT           IDENTITY (1, 1) NOT NULL,
+    [userState] NVARCHAR (25) NULL,
+    [city]      NVARCHAR (30) NULL,
+    [street]    NVARCHAR (50) NULL,
+    [alley]     NVARCHAR (50) NULL,
+    [zip_code]  INT           NULL,
+    [personId]  INT           NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([personId]) REFERENCES [dbo].[account] ([id])
+);
+
+go
+
+CREATE TABLE [dbo].[userPhone] (
+    [id]          INT           IDENTITY (1, 1) NOT NULL,
+    [phoneType]   NVARCHAR (10) NULL,
+    [phoneNumber] INT           NULL,
+    [personId]    INT           NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    FOREIGN KEY ([personId]) REFERENCES [dbo].[account] ([id])
+);
+
